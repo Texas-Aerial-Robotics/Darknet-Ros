@@ -1,5 +1,13 @@
 # YOLO v2 for ROS: Real-Time Object Detection for ROS
 
+This repository has been forked and modified to suit our needs. One noteable chnge is that we made this repository buildable with opencv3 by making this package depend on cv3_bridge. Make sure to clone cv3_bridge in your catkin src directory.
+
+    git clone https://github.com/Texas-Aerial-Robotics/cv3_bridge.git 
+
+Use the [video_stream_opencv package](https://github.com/Texas-Aerial-Robotics/video_stream_opencv) to stream a webcam as a sensor message 
+    
+
+
 ## Overview
 
 This is a ROS package developed for object detection in camera images. You only look once (YOLO) is a state-of-the-art, real-time object detection system. In the following ROS package you are able to use YOLO on GPU and CPU. The pre-trained model of the convolutional neural network is able to detect pre-trained classes including the data set from VOC and COCO (e.g. aeroplane, bicycle, bird, boat, bottle, bus, car, cat, chair, cow, dining table, dog, horse, motorbike, person, potted plant, sheep, sofa, train and tv monitor) or you can also create a network with your own detection objects. For more information about YOLO, Darknet, available training data and training YOLO see the following link: [YOLO: Real-Time Object Detection](http://pjreddie.com/darknet/yolo/). Some part of the code is inspired by the work of [pgigioli](https://github.com/pgigioli).
@@ -30,21 +38,12 @@ This software is built on the Robotic Operating System ([ROS]), which needs to b
 
 In order to install darknet_ros, clone the latest version from this repository into your catkin workspace and compile the package using ROS.
 
-    cd catkin_workspace/src
-    git clone --recursive git@github.com:leggedrobotics/darknet_ros.git
-    cd ../
-
 To maximize performance, make sure to build in *Release* mode. You can specify the build type by setting
 
-    catkin_make -DCMAKE_BUILD_TYPE=Release
 
 or using the [Catkin Command Line Tools](http://catkin-tools.readthedocs.io/en/latest/index.html#)
 
     catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release
-
-Darknet on the CPU is fast (approximately 1.5 seconds on an Intel Core i7-6700HQ CPU @ 2.60GHz × 8) but it's like 500 times faster on GPU! You'll have to have an Nvidia GPU and you'll have to install CUDA. The CMakeLists.txt file automatically detects if you have CUDA installed or not. CUDA is a parallel computing platform and application programming interface (API) model created by Nvidia. If you do not have CUDA on your System the build process will switch to the CPU version of YOLO. If you are compiling with CUDA, you might receive the following build error:
-
-    nvcc fatal : Unsupported gpu architecture 'compute_61'.
 
 This means that you need to check the compute capability (version) of your GPU. You can find a list of supported GPUs in CUDA here: [CUDA - WIKIPEDIA](https://en.wikipedia.org/wiki/CUDA#Supported_GPUs). Simply find the compute capability of your GPU and add it into darknet_ros/CMakeLists.txt. Simply add a similar line like
 
