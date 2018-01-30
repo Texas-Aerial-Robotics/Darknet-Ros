@@ -34,10 +34,10 @@ This software is built on the Robotic Operating System ([ROS]), which needs to b
 
 please install the following dependencies 
 
-'''
+```
  sudo apt install ros-kinetic-image-view 
 
-'''
+```
 
 ### Building
 
