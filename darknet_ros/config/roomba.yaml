@@ -3,9 +3,9 @@ yolo_model:
   config_file:
     name: tiny-yolo.cfg
   weight_file:
-    name: down.backup
+    name: tiny-yolo.backup
   threshold:
-    value: 0.5
+    value: 0.8
   detection_classes:
     names:
       - roomba
